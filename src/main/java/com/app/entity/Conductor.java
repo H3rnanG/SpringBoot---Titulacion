@@ -15,7 +15,7 @@ public class Conductor {
     @Id
     @Column(name = "id_conductor")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idConductor;
+    private Integer idConductor;
 
     @Column(name = "nombre")
     private String nombre;
@@ -24,22 +24,24 @@ public class Conductor {
     private String telefono;
 
     @Column(name = "correo")
-    private int correo;
+    private String correo;
     
     @Column(name = "tipo_licencia")
-    private int tipo_licencia;
+    private String tipo_licencia;
     
     @Column(name = "licencia")
-    private int licencia;
+    private String licencia;
 
     @Column(name = "estado")
-    private int estado;
+    private String estado;
 
-	public int getIdConductor() {
+    // Getters and Setters
+    
+	public Integer getIdConductor() {
 		return idConductor;
 	}
 
-	public void setIdConductor(int idConductor) {
+	public void setIdConductor(Integer idConductor) {
 		this.idConductor = idConductor;
 	}
 
@@ -59,40 +61,42 @@ public class Conductor {
 		this.telefono = telefono;
 	}
 
-	public int getCorreo() {
+	public String getCorreo() {
 		return correo;
 	}
 
-	public void setCorreo(int correo) {
+	public void setCorreo(String correo) {
 		this.correo = correo;
 	}
 
-	public int getTipo_licencia() {
+	public String getTipo_licencia() {
 		return tipo_licencia;
 	}
 
-	public void setTipo_licencia(int tipo_licencia) {
+	public void setTipo_licencia(String tipo_licencia) {
 		this.tipo_licencia = tipo_licencia;
 	}
 
-	public int getLicencia() {
+	public String getLicencia() {
 		return licencia;
 	}
 
-	public void setLicencia(int licencia) {
+	public void setLicencia(String licencia) {
 		this.licencia = licencia;
 	}
 
-	public int getEstado() {
+	public String getEstado() {
 		return estado;
 	}
 
-	public void setEstado(int estado) {
+	public void setEstado(String estado) {
 		this.estado = estado;
 	}
 
-	public Conductor(int idConductor, String nombre, String telefono, int correo, int tipo_licencia, int licencia,
-			int estado) {
+	// Constructors	
+	
+	public Conductor(Integer idConductor, String nombre, String telefono, String correo, String tipo_licencia,
+			String licencia, String estado) {
 		super();
 		this.idConductor = idConductor;
 		this.nombre = nombre;

@@ -1,10 +1,15 @@
 package com.app.entity;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -14,7 +19,7 @@ public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_cliente")
-    private int idCliente;
+    private Integer idCliente;
     
     @Column(name = "nombre_razon_social")
     private String nombreRazonSocial;
@@ -33,12 +38,18 @@ public class Cliente {
     
     @Column(name = "direccion")	
     private String direccion;
+    
+    @OneToMany(mappedBy = "cliente")
+    @JsonManagedReference
+    private List<Mercancia> mercancia;
+    
+    // Getters and Setters
 
 	public int getIdCliente() {
 		return idCliente;
 	}
 
-	public void setIdCliente(int idCliente) {
+	public void setIdCliente(Integer idCliente) {
 		this.idCliente = idCliente;
 	}
 
@@ -90,7 +101,9 @@ public class Cliente {
 		this.direccion = direccion;
 	}
 
-	public Cliente(int idCliente, String razonSocial, String tipoDocumento, String numeroDocumento, String telefono,
+	// Constructors
+	
+	public Cliente(Integer idCliente, String razonSocial, String tipoDocumento, String numeroDocumento, String telefono,
 			String correo, String direccion) {
 		super();
 		this.idCliente = idCliente;

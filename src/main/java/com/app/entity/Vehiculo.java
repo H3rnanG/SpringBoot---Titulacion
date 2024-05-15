@@ -14,34 +14,36 @@ public class Vehiculo {
     @Id
     @Column(name = "id_vehiculo")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idVehiculo;
+    private Integer idVehiculo;
 
     @Column(name = "modelo")
     private String modelo;
 
     @Column(name = "placa")
-    private int placa;
+    private String placa;
 
     @Column(name = "marca")
-    private int marca;
+    private String marca;
     
-    @Column(name = "gasolina_km")
-    private int gasolinaKm;
+    @Column(name = "consumo_km")
+    private Double consumoKm;
 
     @Column(name = "capacidad_personas")
-    private int capacidadPersonas;
+    private Integer capacidadPersonas;
     
-    @Column(name = "capacidad_carga")
-    private int capacidadCarga;
+    @Column(name = "capacidad_carga_tn")
+    private Double capacidadCargaTn;
 
     @Column(name = "estado")
-    private int estado;
+    private Integer estado;
+    
+    // Getters and Setters
 
-	public int getIdVehiculo() {
+	public Integer getIdVehiculo() {
 		return idVehiculo;
 	}
 
-	public void setIdVehiculo(int idVehiculo) {
+	public void setIdVehiculo(Integer idVehiculo) {
 		this.idVehiculo = idVehiculo;
 	}
 
@@ -53,69 +55,71 @@ public class Vehiculo {
 		this.modelo = modelo;
 	}
 
-	public int getPlaca() {
+	public String getPlaca() {
 		return placa;
 	}
 
-	public void setPlaca(int placa) {
+	public void setPlaca(String placa) {
 		this.placa = placa;
 	}
 
-	public int getMarca() {
+	public String getMarca() {
 		return marca;
 	}
 
-	public void setMarca(int marca) {
+	public void setMarca(String marca) {
 		this.marca = marca;
 	}
 
-	public int getGasolinaKm() {
-		return gasolinaKm;
+	public Double getConsumoKm() {
+		return consumoKm;
 	}
 
-	public void setGasolinaKm(int gasolinaKm) {
-		this.gasolinaKm = gasolinaKm;
+	public void setConsumoKm(Double consumoKm) {
+		this.consumoKm = consumoKm;
 	}
 
-	public int getCapacidadPersonas() {
+	public Integer getCapacidadPersonas() {
 		return capacidadPersonas;
 	}
 
-	public void setCapacidadPersonas(int capacidadPersonas) {
+	public void setCapacidadPersonas(Integer capacidadPersonas) {
 		this.capacidadPersonas = capacidadPersonas;
 	}
 
-	public int getCapacidadCarga() {
-		return capacidadCarga;
+	public Double getCapacidadCargaTn() {
+		return capacidadCargaTn;
 	}
 
-	public void setCapacidadCarga(int capacidadCarga) {
-		this.capacidadCarga = capacidadCarga;
+	public void setCapacidadCargaTn(Double capacidadCargaTn) {
+		this.capacidadCargaTn = capacidadCargaTn;
 	}
 
-	public int getEstado() {
+	public Integer getEstado() {
 		return estado;
 	}
 
-	public void setEstado(int estado) {
+	public void setEstado(Integer estado) {
 		this.estado = estado;
 	}
 
-	public Vehiculo(int idVehiculo, String modelo, int placa, int marca, int gasolinaKm, int capacidadPersonas,
-			int capacidadCarga, int estado) {
+	// Constructors	
+	
+	public Vehiculo(Integer idVehiculo, String modelo, String placa, String marca, Double consumoKm,
+			Integer capacidadPersonas, Double capacidadCargaTn, Integer estado) {
 		super();
 		this.idVehiculo = idVehiculo;
 		this.modelo = modelo;
 		this.placa = placa;
 		this.marca = marca;
-		this.gasolinaKm = gasolinaKm;
+		this.consumoKm = consumoKm;
 		this.capacidadPersonas = capacidadPersonas;
-		this.capacidadCarga = capacidadCarga;
+		this.capacidadCargaTn = capacidadCargaTn;
 		this.estado = estado;
 	}
 
 	public Vehiculo() {
 		super();
 	}
-
+    
 }
