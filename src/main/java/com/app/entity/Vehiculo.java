@@ -35,7 +35,7 @@ public class Vehiculo {
     private Double capacidadCargaTn;
 
     @Column(name = "estado")
-    private Integer estado;
+    private String estado;
     
     // Getters and Setters
 
@@ -95,18 +95,18 @@ public class Vehiculo {
 		this.capacidadCargaTn = capacidadCargaTn;
 	}
 
-	public Integer getEstado() {
+	public String getEstado() {
 		return estado;
 	}
 
-	public void setEstado(Integer estado) {
+	public void setEstado(String estado) {
 		this.estado = estado;
 	}
 
 	// Constructors	
 	
 	public Vehiculo(Integer idVehiculo, String modelo, String placa, String marca, Double consumoKm,
-			Integer capacidadPersonas, Double capacidadCargaTn, Integer estado) {
+			Integer capacidadPersonas, Double capacidadCargaTn, String estado) {
 		super();
 		this.idVehiculo = idVehiculo;
 		this.modelo = modelo;

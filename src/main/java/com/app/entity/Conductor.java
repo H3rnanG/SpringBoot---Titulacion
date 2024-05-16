@@ -27,7 +27,7 @@ public class Conductor {
     private String correo;
     
     @Column(name = "tipo_licencia")
-    private String tipo_licencia;
+    private String tipoLicencia;
     
     @Column(name = "licencia")
     private String licencia;
@@ -35,7 +35,7 @@ public class Conductor {
     @Column(name = "estado")
     private String estado;
 
-    // Getters and Setters
+ // Getters and Setters
     
 	public Integer getIdConductor() {
 		return idConductor;
@@ -69,12 +69,12 @@ public class Conductor {
 		this.correo = correo;
 	}
 
-	public String getTipo_licencia() {
-		return tipo_licencia;
+	public String getTipoLicencia() {
+		return tipoLicencia;
 	}
 
-	public void setTipo_licencia(String tipo_licencia) {
-		this.tipo_licencia = tipo_licencia;
+	public void setTipoLicencia(String tipoLicencia) {
+		this.tipoLicencia = tipoLicencia;
 	}
 
 	public String getLicencia() {
@@ -93,16 +93,14 @@ public class Conductor {
 		this.estado = estado;
 	}
 
-	// Constructors	
-	
-	public Conductor(Integer idConductor, String nombre, String telefono, String correo, String tipo_licencia,
+	public Conductor(Integer idConductor, String nombre, String telefono, String correo, String tipoLicencia,
 			String licencia, String estado) {
 		super();
 		this.idConductor = idConductor;
 		this.nombre = nombre;
 		this.telefono = telefono;
 		this.correo = correo;
-		this.tipo_licencia = tipo_licencia;
+		this.tipoLicencia = tipoLicencia;
 		this.licencia = licencia;
 		this.estado = estado;
 	}

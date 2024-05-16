@@ -1,6 +1,6 @@
 package com.app.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -33,8 +33,8 @@ public class Mercancia {
     private String categoria;
 
     @ManyToOne
-    @JsonBackReference
     @JoinColumn(name = "id_cliente")
+    @JsonIgnoreProperties("mercancia")
     private Cliente cliente;
     
     // Getters and Setters

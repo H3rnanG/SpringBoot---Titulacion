@@ -11,9 +11,9 @@ public class CorsConfig implements WebMvcConfigurer{
 
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
-		registry.addMapping("/**") // Define el mapeo de las URLs que quieres permitir CORS
-        		.allowedOrigins("*") // Define los dominios permitidos
-    			.allowedMethods("GET", "POST", "PUT", "DELETE"); // Define los métodos HTTP permitidos
+		registry.addMapping("/**")
+        		.allowedOrigins("*")
+    			.allowedMethods("GET", "POST", "PUT", "DELETE");
 	}
 	
 }

@@ -2,6 +2,7 @@ package com.app.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
@@ -41,6 +42,7 @@ public class Cliente {
     
     @OneToMany(mappedBy = "cliente")
     @JsonManagedReference
+    @JsonIgnoreProperties("cliente")
     private List<Mercancia> mercancia;
     
     // Getters and Setters
@@ -53,14 +55,14 @@ public class Cliente {
 		this.idCliente = idCliente;
 	}
 
-	public String getRazonSocial() {
+	public String getNombreRazonSocial() {
 		return nombreRazonSocial;
 	}
 
-	public void setRazonSocial(String razonSocial) {
-		this.nombreRazonSocial = razonSocial;
+	public void setNombreRazonSocial(String nombreRazonSocial) {
+		this.nombreRazonSocial = nombreRazonSocial;
 	}
-
+	
 	public String getTipoDocumento() {
 		return tipoDocumento;
 	}
