@@ -33,9 +33,13 @@ public class Mercancia {
     private String categoria;
 
     @ManyToOne
-    @JoinColumn(name = "id_cliente")
+    @JoinColumn(name = "id_cliente", referencedColumnName = "id_cliente")
     @JsonIgnoreProperties("mercancia")
     private Cliente cliente;
+    
+    @ManyToOne
+    @JoinColumn(name = "id_guia_remision")
+    private GuiaRemision guiaRemision;
     
     // Getters and Setters
 

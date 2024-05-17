@@ -9,14 +9,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.app.dto.MercanciaDTO;
+import com.app.entity.Cliente;
 import com.app.entity.Mercancia;
+import com.app.repository.ClienteRepository;
 import com.app.repository.MercanciaRepository;
 
 @Service
 public class MercanciaService {
 
     @Autowired
-    MercanciaRepository mercanciaRepository;
+    private MercanciaRepository mercanciaRepository;
+    
+    @Autowired
+    private ClienteRepository clienteRepository;
 
     @Autowired
     ModelMapper mapper;
@@ -32,15 +37,28 @@ public class MercanciaService {
 
 
     public void saveMercancia(MercanciaDTO mercanciaDTO) {
-        Mercancia mercancia = mapper.map(mercanciaDTO, Mercancia.class);
+    	Mercancia mercancia = mapper.map(mercanciaDTO, Mercancia.class);
+        Cliente cliente = clienteRepository.findById(mercanciaDTO.getIdCliente())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente no encontrado"));
+        mercancia.setCliente(cliente);
+
         mercanciaRepository.saveAndFlush(mercancia);
     }
 
     public void updateMercancia(Integer id, MercanciaDTO mercanciaDTO) {
-        Mercancia mercanciaFromDb = mercanciaRepository.findById(id)
+        Mercancia mercancia = mercanciaRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Mercancia no encontrada"));
-        mapper.map(mercanciaDTO, mercanciaFromDb);
-        mercanciaRepository.saveAndFlush(mercanciaFromDb);
+        
+        mercancia.setNombre(mercanciaDTO.getNombre());
+        mercancia.setPrecio(mercanciaDTO.getPrecio());
+        mercancia.setCantidad(mercanciaDTO.getCantidad());
+        mercancia.setCategoria(mercanciaDTO.getCategoria());
+
+        Cliente cliente = clienteRepository.findById(mercanciaDTO.getIdCliente())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente no encontrado"));
+        mercancia.setCliente(cliente);
+
+        mercanciaRepository.saveAndFlush(mercancia);
     }
 
     public void deleteMercancia(Integer id) {
