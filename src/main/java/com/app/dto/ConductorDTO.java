@@ -7,9 +7,15 @@ public class ConductorDTO {
 
     @NotBlank(message = "El Nombre es obligatorio")
     private String nombre;
+    
+    @NotBlank(message = "El Apellido es obligatorio")
+    private String apellido;
 
     @NotBlank(message = "El Teléfono es obligatorio")
     private String telefono;
+    
+    @NotBlank(message = "El DNI es obligatorio")
+    private String dni;
 
     @Email(message = "El Correo electrónico es inválido")
     @NotBlank(message = "El Correo electrónico es obligatorio")
@@ -23,6 +29,22 @@ public class ConductorDTO {
 
     @NotBlank(message = "El Estado es obligatorio")
     private String estado;
+
+	public String getApellido() {
+		return apellido;
+	}
+
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
+
+	public String getDni() {
+		return dni;
+	}
+
+	public void setDni(String dni) {
+		this.dni = dni;
+	}
 
 	public String getNombre() {
 		return nombre;

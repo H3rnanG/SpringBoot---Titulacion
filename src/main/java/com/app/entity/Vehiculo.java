@@ -33,6 +33,12 @@ public class Vehiculo {
     
     @Column(name = "capacidad_carga_tn")
     private Double capacidadCargaTn;
+    
+    @Column(name = "tuc_chv")
+    private String tucChv;
+    
+    @Column(name = "autorizacion")
+    private String autorizacion;
 
     @Column(name = "estado")
     private String estado;
@@ -41,6 +47,22 @@ public class Vehiculo {
 
 	public Integer getIdVehiculo() {
 		return idVehiculo;
+	}
+
+	public String getAutorizacion() {
+		return autorizacion;
+	}
+
+	public void setAutorizacion(String autorizacion) {
+		this.autorizacion = autorizacion;
+	}
+
+	public String getTucChv() {
+		return tucChv;
+	}
+
+	public void setTucChv(String tucChv) {
+		this.tucChv = tucChv;
 	}
 
 	public void setIdVehiculo(Integer idVehiculo) {
@@ -105,8 +127,14 @@ public class Vehiculo {
 
 	// Constructors	
 	
+	
+
+	public Vehiculo() {
+		super();
+	}
+
 	public Vehiculo(Integer idVehiculo, String modelo, String placa, String marca, Double consumoKm,
-			Integer capacidadPersonas, Double capacidadCargaTn, String estado) {
+			Integer capacidadPersonas, Double capacidadCargaTn, String tucChv, String autorizacion, String estado) {
 		super();
 		this.idVehiculo = idVehiculo;
 		this.modelo = modelo;
@@ -115,11 +143,13 @@ public class Vehiculo {
 		this.consumoKm = consumoKm;
 		this.capacidadPersonas = capacidadPersonas;
 		this.capacidadCargaTn = capacidadCargaTn;
+		this.tucChv = tucChv;
+		this.autorizacion = autorizacion;
 		this.estado = estado;
 	}
 
-	public Vehiculo() {
-		super();
-	}
+	
+
+	
     
 }

@@ -44,15 +44,15 @@ public class GuiaRemisionController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<Void> createGuiaRemision(@Validated @RequestBody GuiaRemisionDTO guiaRemisionDTO) {
-        guiaRemisionService.saveGuiaRemision(guiaRemisionDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+    public ResponseEntity<GuiaRemision> createGuiaRemision(@Validated @RequestBody GuiaRemisionDTO guiaRemisionDTO) {
+        GuiaRemision guiaRemision = guiaRemisionService.saveGuiaRemision(guiaRemisionDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(guiaRemision);
     }
 
     @PutMapping("/")
-    public ResponseEntity<Void> updateGuiaRemision(@RequestParam("id") int id, @Validated @RequestBody GuiaRemisionDTO guiaRemisionDTO) {
+    public ResponseEntity<Void> addDocumentId(@RequestParam("id") Integer id,@RequestBody String documentId) {
         try {
-            guiaRemisionService.updateGuiaRemision(id, guiaRemisionDTO);
+            guiaRemisionService.addDocumentId(id, documentId);
             return ResponseEntity.ok().build();
         } catch (ResponseStatusException e) {
             return ResponseEntity.status(e.getStatusCode()).build();

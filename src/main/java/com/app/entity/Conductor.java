@@ -19,7 +19,13 @@ public class Conductor {
 
     @Column(name = "nombre")
     private String nombre;
+    
+    @Column(name = "apellido")
+    private String apellido;
 
+    @Column(name = "dni")
+    private String dni;
+    
     @Column(name = "telefono")
     private String telefono;
 
@@ -39,6 +45,22 @@ public class Conductor {
     
 	public Integer getIdConductor() {
 		return idConductor;
+	}
+
+	public String getApellido() {
+		return apellido;
+	}
+
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
+
+	public String getDni() {
+		return dni;
+	}
+
+	public void setDni(String dni) {
+		this.dni = dni;
 	}
 
 	public void setIdConductor(Integer idConductor) {
@@ -93,11 +115,14 @@ public class Conductor {
 		this.estado = estado;
 	}
 
-	public Conductor(Integer idConductor, String nombre, String telefono, String correo, String tipoLicencia,
-			String licencia, String estado) {
+	
+
+	public Conductor(Integer idConductor, String nombre, String dni, String telefono, String correo,
+			String tipoLicencia, String licencia, String estado) {
 		super();
 		this.idConductor = idConductor;
 		this.nombre = nombre;
+		this.dni = dni;
 		this.telefono = telefono;
 		this.correo = correo;
 		this.tipoLicencia = tipoLicencia;

@@ -6,6 +6,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.Mapping;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.app.dto.GuiaRemisionDTO;
@@ -17,6 +18,8 @@ import com.app.repository.ClienteRepository;
 import com.app.repository.ConductorRepository;
 import com.app.repository.GuiaRemisionRepository;
 import com.app.repository.VehiculoRepository;
+
+import jakarta.annotation.PostConstruct;
 
 @Service
 public class GuiaRemisionService {
@@ -42,32 +45,27 @@ public class GuiaRemisionService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Guía de remisión no encontrada"));
     }
 
-    public void saveGuiaRemision(GuiaRemisionDTO guiaRemisionDTO) {
+    public GuiaRemision saveGuiaRemision(GuiaRemisionDTO guiaRemisionDTO) {
         GuiaRemision guiaRemision = mapper.map(guiaRemisionDTO, GuiaRemision.class);
+        
         Vehiculo vehiculo = vehiculoRepository.findById(guiaRemisionDTO.getIdVehiculo())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Vehículo no encontrado"));
+        
         Conductor conductor = conductorRepository.findById(guiaRemisionDTO.getIdConductor())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Conductor no encontrado"));
+        
         guiaRemision.setVehiculo(vehiculo);
         guiaRemision.setConductor(conductor);
-        guiaRemisionRepository.saveAndFlush(guiaRemision);
+        
+        guiaRemision = guiaRemisionRepository.saveAndFlush(guiaRemision);
+        
+        return guiaRemision;
     }
 
-    public void updateGuiaRemision(Integer id, GuiaRemisionDTO guiaRemisionDTO) {
+    public void addDocumentId(Integer id, String documentId) {
         GuiaRemision guiaRemision = guiaRemisionRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Guía de remisión no encontrada"));
-        guiaRemision.setRucRemitente(guiaRemisionDTO.getRucRemitente());
-        guiaRemision.setRemitente(guiaRemisionDTO.getRemitente());
-        guiaRemision.setRucDestinatario(guiaRemisionDTO.getRucDestinatario());
-        guiaRemision.setDestinatario(guiaRemisionDTO.getDestinatario());
-        guiaRemision.setFechaEmision(guiaRemisionDTO.getFechaEmision());
-        guiaRemision.setInicioTraslado(guiaRemisionDTO.getInicioTraslado());
-        guiaRemision.setUbicacionPartida(guiaRemisionDTO.getUbicacionPartida());
-        guiaRemision.setDireccionPartida(guiaRemisionDTO.getDireccionPartida());
-        guiaRemision.setUbicacionLlegada(guiaRemisionDTO.getUbicacionLlegada());
-        guiaRemision.setDireccionLlegada(guiaRemisionDTO.getDireccionLlegada());
-        guiaRemision.setMedidaPeso(guiaRemisionDTO.getMedidaPeso());
-        guiaRemision.setPesoBruto(guiaRemisionDTO.getPesoBruto());
+        guiaRemision.setDocumentId(documentId);
         guiaRemisionRepository.saveAndFlush(guiaRemision);
     }
 

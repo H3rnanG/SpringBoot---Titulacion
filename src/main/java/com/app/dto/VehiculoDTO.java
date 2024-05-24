@@ -25,9 +25,31 @@ public class VehiculoDTO {
     
 	@NotNull(message = "La Capacida de Carga es obligatoria")
     private Double capacidadCargaTn;
+	
+	@NotBlank(message = "El TUC o CHV es obligatoria")
+	private String tucChv;
+	
+	@NotBlank(message = "La autorizacion es obligatoria")
+    private String autorizacion;
 
-    @Column(name = "El Estado es Obligatorio")
+    @NotBlank(message = "El Estado es Obligatorio")
     private String estado;
+
+	public String getTucChv() {
+		return tucChv;
+	}
+
+	public void setTucChv(String tucChv) {
+		this.tucChv = tucChv;
+	}
+
+	public String getAutorizacion() {
+		return autorizacion;
+	}
+
+	public void setAutorizacion(String autorizacion) {
+		this.autorizacion = autorizacion;
+	}
 
 	public String getModelo() {
 		return modelo;

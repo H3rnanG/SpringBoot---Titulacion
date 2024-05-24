@@ -1,20 +1,27 @@
 package com.app.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public class GuiaRemisionDTO {
 
-    @NotNull(message = "El RUC del remitente es obligatorio")
-    private Long rucRemitente;
+	@NotBlank(message = "La Guia es obligatoria")
+	private String guia;
+	
+    @NotNull(message = "El documento del remitente es obligatorio")
+    private Long documentoRemitente;
+    
+    @NotBlank(message = "El tipo de documento es obligatorio")
+    private String tipoDocumentoRemitente;
 
     @NotBlank(message = "El nombre del remitente es obligatorio")
     private String remitente;
 
-    @NotNull(message = "El RUC del destinatario es obligatorio")
-    private Long rucDestinatario;
+    @NotNull(message = "El documento del destinatario es obligatorio")
+    private Long documentoDestinatario;
+    
+    @NotBlank(message = "El tipo de documento es obligatorio")
+    private String tipoDocumentoDestinatario;
 
     @NotBlank(message = "El nombre del destinatario es obligatorio")
     private String destinatario;
@@ -49,12 +56,28 @@ public class GuiaRemisionDTO {
     @NotNull(message = "El peso bruto es obligatorio")
     private Double pesoBruto;
 
-	public Long getRucRemitente() {
-		return rucRemitente;
+	public String getGuia() {
+		return guia;
 	}
 
-	public void setRucRemitente(Long rucRemitente) {
-		this.rucRemitente = rucRemitente;
+	public void setGuia(String guia) {
+		this.guia = guia;
+	}
+
+	public Long getDocumentoRemitente() {
+		return documentoRemitente;
+	}
+
+	public void setDocumentoRemitente(Long documentoRemitente) {
+		this.documentoRemitente = documentoRemitente;
+	}
+
+	public String getTipoDocumentoRemitente() {
+		return tipoDocumentoRemitente;
+	}
+
+	public void setTipoDocumentoRemitente(String tipoDocumentoRemitente) {
+		this.tipoDocumentoRemitente = tipoDocumentoRemitente;
 	}
 
 	public String getRemitente() {
@@ -65,12 +88,20 @@ public class GuiaRemisionDTO {
 		this.remitente = remitente;
 	}
 
-	public Long getRucDestinatario() {
-		return rucDestinatario;
+	public Long getDocumentoDestinatario() {
+		return documentoDestinatario;
 	}
 
-	public void setRucDestinatario(Long rucDestinatario) {
-		this.rucDestinatario = rucDestinatario;
+	public void setDocumentoDestinatario(Long documentoDestinatario) {
+		this.documentoDestinatario = documentoDestinatario;
+	}
+
+	public String getTipoDocumentoDestinatario() {
+		return tipoDocumentoDestinatario;
+	}
+
+	public void setTipoDocumentoDestinatario(String tipoDocumentoDestinatario) {
+		this.tipoDocumentoDestinatario = tipoDocumentoDestinatario;
 	}
 
 	public String getDestinatario() {
@@ -109,8 +140,8 @@ public class GuiaRemisionDTO {
 		return idConductor;
 	}
 
-	public void setIdConductor(Integer idCliente) {
-		this.idConductor = idCliente;
+	public void setIdConductor(Integer idConductor) {
+		this.idConductor = idConductor;
 	}
 
 	public Integer getUbicacionPartida() {
@@ -161,7 +192,8 @@ public class GuiaRemisionDTO {
 		this.pesoBruto = pesoBruto;
 	}
 
-    // Getters and Setters
+	
+    
     
     
 }
