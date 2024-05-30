@@ -6,20 +6,15 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.Mapping;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.app.dto.GuiaRemisionDTO;
-import com.app.entity.Cliente;
 import com.app.entity.Conductor;
 import com.app.entity.GuiaRemision;
 import com.app.entity.Vehiculo;
-import com.app.repository.ClienteRepository;
 import com.app.repository.ConductorRepository;
 import com.app.repository.GuiaRemisionRepository;
 import com.app.repository.VehiculoRepository;
-
-import jakarta.annotation.PostConstruct;
 
 @Service
 public class GuiaRemisionService {
