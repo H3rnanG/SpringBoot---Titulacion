@@ -5,12 +5,12 @@ import jakarta.validation.constraints.NotNull;
 
 public class GuiaRemisionDTO {
 
-	@NotBlank(message = "La Guia es obligatoria")
-	private String guia;
-	
+    @NotBlank(message = "La Guia es obligatoria")
+    private String guia;
+
     @NotNull(message = "El documento del remitente es obligatorio")
     private Long documentoRemitente;
-    
+
     @NotBlank(message = "El tipo de documento es obligatorio")
     private String tipoDocumentoRemitente;
 
@@ -19,7 +19,7 @@ public class GuiaRemisionDTO {
 
     @NotNull(message = "El documento del destinatario es obligatorio")
     private Long documentoDestinatario;
-    
+
     @NotBlank(message = "El tipo de documento es obligatorio")
     private String tipoDocumentoDestinatario;
 
@@ -192,8 +192,4 @@ public class GuiaRemisionDTO {
 		this.pesoBruto = pesoBruto;
 	}
 
-	
-    
-    
-    
 }

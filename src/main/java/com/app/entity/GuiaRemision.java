@@ -14,101 +14,79 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "guia-remisison")
+@Table(name = "guia_remision")
 public class GuiaRemision {
 
-	@Id
-    @Column(name = "id_guia_remision")
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_guia_remision")
     private Integer idGuiaRemision;
-	
-	@Column(name = "guia")
-	private String guia;
-	
-	@Column(name = "documento_remitente")
+
+    @Column(name = "guia")
+    private String guia;
+
+    @Column(name = "documento_remitente")
     private Long documentoRemitente;
-	
-	@Column(name = "tipo_documento_remitente")
+
+    @Column(name = "tipo_documento_remitente")
     private String tipoDocumentoRemitente;
-	
-	@Column(name = "remitente")
+
+    @Column(name = "remitente")
     private String remitente;
-	
-	@Column(name = "documento_destinatario")
+
+    @Column(name = "documento_destinatario")
     private Long documentoDestinatario;
-	
-	@Column(name = "tipo_documento_destinatario")
-	private String tipoDocumentoDestinatario;
-	
-	@Column(name = "destinatario")
+
+    @Column(name = "tipo_documento_destinatario")
+    private String tipoDocumentoDestinatario;
+
+    @Column(name = "destinatario")
     private String destinatario;
-	
-	@Column(name = "fecha_emision")
+
+    @Column(name = "fecha_emision")
     private String fechaEmision;
-	
-	@Column(name = "inicio_traslado")
+
+    @Column(name = "inicio_traslado")
     private String inicioTraslado;
-	
-	@ManyToOne
-    @JoinColumn(name = "id_vehiculo", referencedColumnName = "id_vehiculo")
-    private Vehiculo vehiculo;
-	
-	@ManyToOne
-    @JoinColumn(name = "id_conductor", referencedColumnName = "id_conductor")
-    private Conductor conductor;
-	
-	@Column(name = "ubicacion_partida")
-    private Integer ubicacionPartida;
-	
-	@Column(name = "direccion_partida")
-    private String direccionPartida;
-	
-	@Column(name = "ubicacion_llegada")
-    private Integer ubicacionLlegada;
-	
-	@Column(name = "direccion_llegada")
-    private String direccionLlegada;
-	
-	@Column(name = "medida_peso")
-    private String medidaPeso;
-	
-	@Column(name = "pesoBruto")
-    private Double pesoBruto;
-	
-	@Column(name = "documentId")
+    
+    @Column(name = "documentId")
     private String documentId;
 
-	@OneToMany(mappedBy = "guiaRemision", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Mercancia> mercancias;
-	
-	// Getters and Setter
-	
-	public GuiaRemision() {
-		super();
+    @ManyToOne
+    @JoinColumn(name = "id_vehiculo")
+    private Vehiculo vehiculo;
+
+    @ManyToOne
+    @JoinColumn(name = "id_conductor")
+    private Conductor conductor;
+
+    @Column(name = "ubicacion_partida")
+    private Integer ubicacionPartida;
+
+    @Column(name = "direccion_partida")
+    private String direccionPartida;
+
+    @Column(name = "ubicacion_llegada")
+    private Integer ubicacionLlegada;
+
+    @Column(name = "direccion_llegada")
+    private String direccionLlegada;
+
+    @Column(name = "medida_peso")
+    private String medidaPeso;
+
+    @Column(name = "peso_bruto")
+    private Double pesoBruto;
+
+    @OneToMany(mappedBy = "guiaRemision", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Mercancia> mercancias;
+
+	public Integer getIdGuiaRemision() {
+		return idGuiaRemision;
 	}
 
-	public String getDocumentId() {
-		return documentId;
-	}
-
-	public void setDocumentId(String documentId) {
-		this.documentId = documentId;
-	}
-
-	public String getTipoDocumentoRemitente() {
-		return tipoDocumentoRemitente;
-	}
-
-	public void setTipoDocumentoRemitente(String tipoDocumentoRemitente) {
-		this.tipoDocumentoRemitente = tipoDocumentoRemitente;
-	}
-
-	public String getTipoDocumentoDestinatario() {
-		return tipoDocumentoDestinatario;
-	}
-
-	public void setTipoDocumentoDestinatario(String tipoDocumentoDestinatario) {
-		this.tipoDocumentoDestinatario = tipoDocumentoDestinatario;
+	public void setIdGuiaRemision(Integer idGuiaRemision) {
+		this.idGuiaRemision = idGuiaRemision;
 	}
 
 	public String getGuia() {
@@ -119,20 +97,20 @@ public class GuiaRemision {
 		this.guia = guia;
 	}
 
-	public Integer getIdGuiaRemision() {
-		return idGuiaRemision;
-	}
-
-	public void setIdGuiaRemision(Integer idGuiaRemision) {
-		this.idGuiaRemision = idGuiaRemision;
-	}
-
 	public Long getDocumentoRemitente() {
 		return documentoRemitente;
 	}
 
-	public void setDocumentoRemitente(Long rucRemitente) {
-		this.documentoRemitente = rucRemitente;
+	public void setDocumentoRemitente(Long documentoRemitente) {
+		this.documentoRemitente = documentoRemitente;
+	}
+
+	public String getTipoDocumentoRemitente() {
+		return tipoDocumentoRemitente;
+	}
+
+	public void setTipoDocumentoRemitente(String tipoDocumentoRemitente) {
+		this.tipoDocumentoRemitente = tipoDocumentoRemitente;
 	}
 
 	public String getRemitente() {
@@ -147,8 +125,16 @@ public class GuiaRemision {
 		return documentoDestinatario;
 	}
 
-	public void setDocumentoDestinatario(Long rucDestinatario) {
-		this.documentoDestinatario = rucDestinatario;
+	public void setDocumentoDestinatario(Long documentoDestinatario) {
+		this.documentoDestinatario = documentoDestinatario;
+	}
+
+	public String getTipoDocumentoDestinatario() {
+		return tipoDocumentoDestinatario;
+	}
+
+	public void setTipoDocumentoDestinatario(String tipoDocumentoDestinatario) {
+		this.tipoDocumentoDestinatario = tipoDocumentoDestinatario;
 	}
 
 	public String getDestinatario() {
@@ -246,16 +232,24 @@ public class GuiaRemision {
 	public void setMercancias(List<Mercancia> mercancias) {
 		this.mercancias = mercancias;
 	}
+	
+	public String getDocumentId() {
+		return documentId;
+	}
 
-	public GuiaRemision(Integer idGuiaRemision, String documentId, String guia, Long documentoRemitente,
-			String tipoDocumentoRemitente, String remitente, Long documentoDestinatario,
-			String tipoDocumentoDestinatario, String destinatario, String fechaEmision, String inicioTraslado,
-			Vehiculo vehiculo, Conductor conductor, Integer ubicacionPartida, String direccionPartida,
-			Integer ubicacionLlegada, String direccionLlegada, String medidaPeso, Double pesoBruto,
-			List<Mercancia> mercancias) {
+	public void setDocumentId(String documentId) {
+		this.documentId = documentId;
+	}
+	
+	
+
+	public GuiaRemision(Integer idGuiaRemision, String guia, Long documentoRemitente, String tipoDocumentoRemitente,
+			String remitente, Long documentoDestinatario, String tipoDocumentoDestinatario, String destinatario,
+			String fechaEmision, String inicioTraslado, String documentId, Vehiculo vehiculo, Conductor conductor,
+			Integer ubicacionPartida, String direccionPartida, Integer ubicacionLlegada, String direccionLlegada,
+			String medidaPeso, Double pesoBruto, List<Mercancia> mercancias) {
 		super();
 		this.idGuiaRemision = idGuiaRemision;
-		this.documentId = documentId;
 		this.guia = guia;
 		this.documentoRemitente = documentoRemitente;
 		this.tipoDocumentoRemitente = tipoDocumentoRemitente;
@@ -265,6 +259,7 @@ public class GuiaRemision {
 		this.destinatario = destinatario;
 		this.fechaEmision = fechaEmision;
 		this.inicioTraslado = inicioTraslado;
+		this.documentId = documentId;
 		this.vehiculo = vehiculo;
 		this.conductor = conductor;
 		this.ubicacionPartida = ubicacionPartida;
@@ -276,8 +271,8 @@ public class GuiaRemision {
 		this.mercancias = mercancias;
 	}
 
-	
-	
-	
-	
+	public GuiaRemision() {
+		super();
+	}
+    
 }

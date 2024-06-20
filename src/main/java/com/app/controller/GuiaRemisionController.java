@@ -44,9 +44,9 @@ public class GuiaRemisionController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<GuiaRemision> createGuiaRemision(@Validated @RequestBody GuiaRemisionDTO guiaRemisionDTO) {
-        GuiaRemision guiaRemision = guiaRemisionService.saveGuiaRemision(guiaRemisionDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(guiaRemision);
+    public ResponseEntity<Void> createGuiaRemision(@Validated @RequestBody GuiaRemisionDTO guiaRemisionDTO) {
+        guiaRemisionService.saveGuiaRemision(guiaRemisionDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @PutMapping("/")

@@ -43,6 +43,9 @@ public class Cliente {
     private String direccion;
     
     @OneToMany(mappedBy = "cliente")
+    private List<Mercancia> mercancias;
+    
+    @OneToMany(mappedBy = "cliente")
     @JsonManagedReference
     @JsonIgnoreProperties("cliente")
     private List<Mercancia> mercancia;
