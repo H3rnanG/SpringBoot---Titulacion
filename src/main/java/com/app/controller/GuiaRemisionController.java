@@ -1,6 +1,7 @@
 package com.app.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -67,5 +68,23 @@ public class GuiaRemisionController {
         } catch (ResponseStatusException e) {
             return ResponseEntity.status(e.getStatusCode()).build();
         }
+    }
+    
+    @GetMapping("/registrados-hoy")
+    public ResponseEntity<Long> getGuiasRemisionRegistradasHoy() {
+        long count = guiaRemisionService.getGuiasRemisionRegistradasHoy();
+        return ResponseEntity.ok(count);
+    }
+
+    @GetMapping("/count-guias-mes")
+    public ResponseEntity<List<Map<String, Object>>> countGuiasRemisionPorMes() {
+        List<Map<String, Object>> result = guiaRemisionService.countGuiasRemisionPorMes();
+        return ResponseEntity.ok(result);
+    }
+    
+    @GetMapping("/count-guias-ultimos-30-dias")
+    public ResponseEntity<List<Map<String, Object>>> countGuiasRemisionUltimos30Dias() {
+        List<Map<String, Object>> result = guiaRemisionService.countGuiasRemisionUltimos30Dias();
+        return ResponseEntity.ok(result);
     }
 }

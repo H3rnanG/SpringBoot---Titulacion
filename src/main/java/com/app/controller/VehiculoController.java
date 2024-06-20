@@ -1,6 +1,8 @@
 package com.app.controller;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -67,5 +69,17 @@ public class VehiculoController {
         } catch (ResponseStatusException e) {
             return ResponseEntity.status(e.getStatusCode()).build();
         }
+    }
+    
+    @GetMapping("/estado")
+    public ResponseEntity<Map<String, BigDecimal>> getCountByEstado() {
+        Map<String, BigDecimal> countByEstado = vehiculoService.countByEstado();
+        return ResponseEntity.ok(countByEstado);
+    }
+    
+    @GetMapping("/viajes")
+    public ResponseEntity<List<Map<String, Object>>> getVehiculosConViajes() {
+        List<Map<String, Object>> vehiculos = vehiculoService.getVehiculosConViajes();
+        return ResponseEntity.ok(vehiculos);
     }
 }

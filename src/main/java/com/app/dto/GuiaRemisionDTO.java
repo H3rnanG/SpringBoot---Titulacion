@@ -5,17 +5,8 @@ import jakarta.validation.constraints.NotNull;
 
 public class GuiaRemisionDTO {
 
-    @NotBlank(message = "La Guia es obligatoria")
+    @NotBlank(message = "La Guía es obligatoria")
     private String guia;
-
-    @NotNull(message = "El documento del remitente es obligatorio")
-    private Long documentoRemitente;
-
-    @NotBlank(message = "El tipo de documento es obligatorio")
-    private String tipoDocumentoRemitente;
-
-    @NotBlank(message = "El nombre del remitente es obligatorio")
-    private String remitente;
 
     @NotNull(message = "El documento del destinatario es obligatorio")
     private Long documentoDestinatario;
@@ -56,36 +47,15 @@ public class GuiaRemisionDTO {
     @NotNull(message = "El peso bruto es obligatorio")
     private Double pesoBruto;
 
+    @NotNull(message = "El cliente remitente es obligatorio")
+    private Integer idClienteRemitente;
+
 	public String getGuia() {
 		return guia;
 	}
 
 	public void setGuia(String guia) {
 		this.guia = guia;
-	}
-
-	public Long getDocumentoRemitente() {
-		return documentoRemitente;
-	}
-
-	public void setDocumentoRemitente(Long documentoRemitente) {
-		this.documentoRemitente = documentoRemitente;
-	}
-
-	public String getTipoDocumentoRemitente() {
-		return tipoDocumentoRemitente;
-	}
-
-	public void setTipoDocumentoRemitente(String tipoDocumentoRemitente) {
-		this.tipoDocumentoRemitente = tipoDocumentoRemitente;
-	}
-
-	public String getRemitente() {
-		return remitente;
-	}
-
-	public void setRemitente(String remitente) {
-		this.remitente = remitente;
 	}
 
 	public Long getDocumentoDestinatario() {
@@ -192,4 +162,13 @@ public class GuiaRemisionDTO {
 		this.pesoBruto = pesoBruto;
 	}
 
+	public Integer getIdClienteRemitente() {
+		return idClienteRemitente;
+	}
+
+	public void setIdClienteRemitente(Integer idClienteRemitente) {
+		this.idClienteRemitente = idClienteRemitente;
+	}
+    
 }
+

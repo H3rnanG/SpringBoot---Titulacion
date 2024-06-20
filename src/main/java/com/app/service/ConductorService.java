@@ -1,6 +1,14 @@
 package com.app.service;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.app.dto.ConductorDTO;
+import com.app.dto.ConductorViajesDTO;
 import com.app.entity.Conductor;
 import com.app.repository.ConductorRepository;
 
@@ -45,5 +54,23 @@ public class ConductorService {
 
     public void deleteConductor(Integer id) {
         conductorRepository.deleteById(id);
+    }
+
+    public List<Map<String, Object>> getConductoresConViajes() {
+        List<Object[]> results = conductorRepository.findConductorViajes();
+        List<Map<String, Object>> conductoresViajes = new ArrayList();
+
+        for (Object[] result : results) {
+            Map<String, Object> conductor = new HashMap<>();
+            conductor.put("nombreCompleto", result[0]);
+            conductor.put("numeroViajes", result[1]);
+            conductoresViajes.add(conductor);
+        }
+
+        return conductoresViajes;
+    }
+    
+    public Map<String, BigDecimal> getCountByEstado() {
+        return conductorRepository.countByEstado();
     }
 }

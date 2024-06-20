@@ -1,8 +1,12 @@
 package com.app.controller;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -17,8 +21,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.app.dto.ConductorDTO;
+import com.app.dto.ConductorViajesDTO;
 import com.app.entity.Conductor;
 import com.app.service.ConductorService;
+import com.app.service.GuiaRemisionService;
 
 @RestController
 @RequestMapping(path = "/api/conductor")
@@ -68,4 +74,16 @@ public class ConductorController {
             return ResponseEntity.status(e.getStatusCode()).build();
         }
     }
+    
+    @GetMapping("/viajes")
+    public ResponseEntity<List<Map<String, Object>>> getConductoresConViajes() {
+        List<Map<String, Object>> conductores = conductorService.getConductoresConViajes();
+        return ResponseEntity.ok(conductores);
+    }
+    
+    @GetMapping("/estado")
+    public Map<String, BigDecimal> getCountByEstado() {
+        return conductorService.getCountByEstado();
+    }
+    
 }

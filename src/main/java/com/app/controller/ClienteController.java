@@ -81,5 +81,17 @@ public class ClienteController {
         Map<String, Long> clientesPorMes = clienteService.clientesPorMes();
         return ResponseEntity.ok(clientesPorMes);
     }
+    
+    @GetMapping("/top-clientes-guias")
+    public ResponseEntity<List<Map<String, Object>>> getTopClientesGuias() {
+        List<Map<String, Object>> clientes = clienteService.getClientesConMasGuiasGeneradas();
+        return ResponseEntity.ok(clientes);
+    }
+    
+    @GetMapping("/top-mercancias")
+    public ResponseEntity<List<Map<String, Object>>> getTopClientesPorMercancias() {
+        List<Map<String, Object>> clientes = clienteService.getTopClientesPorMercancias();
+        return ResponseEntity.ok(clientes);
+    }
 }
 

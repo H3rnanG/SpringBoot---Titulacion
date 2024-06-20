@@ -68,4 +68,10 @@ public class MercanciaController {
             return ResponseEntity.status(e.getStatusCode()).build();
         }
     }
+    
+    @GetMapping("/registrados-hoy")
+    public ResponseEntity<Long> getMercanciasRegistradasHoy() {
+        long count = mercanciaService.getMercanciasRegistradasHoy();
+        return ResponseEntity.ok(count);
+    }
 }

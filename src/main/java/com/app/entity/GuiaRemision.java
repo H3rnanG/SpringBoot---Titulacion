@@ -1,5 +1,6 @@
 package com.app.entity;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -11,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 
 @Entity
@@ -25,14 +27,9 @@ public class GuiaRemision {
     @Column(name = "guia")
     private String guia;
 
-    @Column(name = "documento_remitente")
-    private Long documentoRemitente;
-
-    @Column(name = "tipo_documento_remitente")
-    private String tipoDocumentoRemitente;
-
-    @Column(name = "remitente")
-    private String remitente;
+    @ManyToOne
+    @JoinColumn(name = "id_cliente_remitente", referencedColumnName = "id_cliente")
+    private Cliente remitente;
 
     @Column(name = "documento_destinatario")
     private Long documentoDestinatario;
@@ -80,6 +77,9 @@ public class GuiaRemision {
 
     @OneToMany(mappedBy = "guiaRemision", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Mercancia> mercancias;
+    
+    @Column(name = "fecha_creacion")
+    private LocalDateTime fechaCreacion;
 
 	public Integer getIdGuiaRemision() {
 		return idGuiaRemision;
@@ -97,27 +97,11 @@ public class GuiaRemision {
 		this.guia = guia;
 	}
 
-	public Long getDocumentoRemitente() {
-		return documentoRemitente;
-	}
-
-	public void setDocumentoRemitente(Long documentoRemitente) {
-		this.documentoRemitente = documentoRemitente;
-	}
-
-	public String getTipoDocumentoRemitente() {
-		return tipoDocumentoRemitente;
-	}
-
-	public void setTipoDocumentoRemitente(String tipoDocumentoRemitente) {
-		this.tipoDocumentoRemitente = tipoDocumentoRemitente;
-	}
-
-	public String getRemitente() {
+	public Cliente getRemitente() {
 		return remitente;
 	}
 
-	public void setRemitente(String remitente) {
+	public void setRemitente(Cliente remitente) {
 		this.remitente = remitente;
 	}
 
@@ -240,19 +224,15 @@ public class GuiaRemision {
 	public void setDocumentId(String documentId) {
 		this.documentId = documentId;
 	}
-	
-	
 
-	public GuiaRemision(Integer idGuiaRemision, String guia, Long documentoRemitente, String tipoDocumentoRemitente,
-			String remitente, Long documentoDestinatario, String tipoDocumentoDestinatario, String destinatario,
-			String fechaEmision, String inicioTraslado, String documentId, Vehiculo vehiculo, Conductor conductor,
-			Integer ubicacionPartida, String direccionPartida, Integer ubicacionLlegada, String direccionLlegada,
-			String medidaPeso, Double pesoBruto, List<Mercancia> mercancias) {
+	public GuiaRemision(Integer idGuiaRemision, String guia, Cliente remitente, Long documentoDestinatario,
+			String tipoDocumentoDestinatario, String destinatario, String fechaEmision, String inicioTraslado,
+			String documentId, Vehiculo vehiculo, Conductor conductor, Integer ubicacionPartida,
+			String direccionPartida, Integer ubicacionLlegada, String direccionLlegada, String medidaPeso,
+			Double pesoBruto, List<Mercancia> mercancias) {
 		super();
 		this.idGuiaRemision = idGuiaRemision;
 		this.guia = guia;
-		this.documentoRemitente = documentoRemitente;
-		this.tipoDocumentoRemitente = tipoDocumentoRemitente;
 		this.remitente = remitente;
 		this.documentoDestinatario = documentoDestinatario;
 		this.tipoDocumentoDestinatario = tipoDocumentoDestinatario;
@@ -273,6 +253,11 @@ public class GuiaRemision {
 
 	public GuiaRemision() {
 		super();
+	}
+	
+	@PrePersist
+	protected void onCreate() {
+	    this.fechaCreacion = LocalDateTime.now();
 	}
     
 }

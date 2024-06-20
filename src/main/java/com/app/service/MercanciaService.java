@@ -35,7 +35,6 @@ public class MercanciaService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Mercancia no encontrada"));
     }
 
-
     public void saveMercancia(MercanciaDTO mercanciaDTO) {
     	Mercancia mercancia = mapper.map(mercanciaDTO, Mercancia.class);
         Cliente cliente = clienteRepository.findById(mercanciaDTO.getIdCliente())
@@ -63,5 +62,9 @@ public class MercanciaService {
 
     public void deleteMercancia(Integer id) {
         mercanciaRepository.deleteById(id);
+    }
+    
+    public long getMercanciasRegistradasHoy() {
+        return mercanciaRepository.countMercanciaRegistradosHoy();
     }
 }

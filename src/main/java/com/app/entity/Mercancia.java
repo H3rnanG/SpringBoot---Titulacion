@@ -1,5 +1,7 @@
 package com.app.entity;
 
+import java.time.LocalDateTime;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
@@ -9,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 
 @Entity
@@ -40,6 +43,9 @@ public class Mercancia {
     @ManyToOne
     @JoinColumn(name = "id_guia_remision")
     private GuiaRemision guiaRemision;
+    
+    @Column(name = "fecha_creacion")
+    private LocalDateTime fechaCreacion;
     
     // Getters and Setters
 
@@ -106,6 +112,11 @@ public class Mercancia {
 
 	public Mercancia() {
 		super();
+	}
+	
+	@PrePersist
+	protected void onCreate() {
+	    this.fechaCreacion = LocalDateTime.now();
 	}
     
 }

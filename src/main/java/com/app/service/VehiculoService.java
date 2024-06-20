@@ -1,6 +1,10 @@
 package com.app.service;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +33,6 @@ public class VehiculoService {
         return vehiculoRepository.findById(id)
                                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Vehículo no encontrado"));
     }
-        
     
     public void saveVehiculo(VehiculoDTO vehiculoDTO) {
         Vehiculo vehiculo = mapper.map(vehiculoDTO, Vehiculo.class);
@@ -45,6 +48,24 @@ public class VehiculoService {
     
     public void deleteVehiculo(Integer id) {
         vehiculoRepository.deleteById(id);
+    }
+    
+    public Map<String, BigDecimal> countByEstado() {
+        return vehiculoRepository.countByEstado();
+    }
+    
+    public List<Map<String, Object>> getVehiculosConViajes() {
+        List<Object[]> results = vehiculoRepository.findVehiculoViajes();
+        List<Map<String, Object>> vehiculosViajes = new ArrayList();
+
+        for (Object[] result : results) {
+            Map<String, Object> vehiculo = new HashMap<>();
+            vehiculo.put("placa", result[0]);
+            vehiculo.put("numeroViajes", result[1]);
+            vehiculosViajes.add(vehiculo);
+        }
+
+        return vehiculosViajes;
     }
     
 }

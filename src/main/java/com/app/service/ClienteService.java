@@ -77,4 +77,11 @@ public class ClienteService {
         return date.format(DateTimeFormatter.ofPattern("M"));
     }
 	
+    public List<Map<String, Object>> getClientesConMasGuiasGeneradas() {
+        return clienteRepository.findTopClientesByGuiasGeneradas();
+    }
+    
+    public List<Map<String, Object>> getTopClientesPorMercancias() {
+        return clienteRepository.findTopClientesByMercancias();
+    }
 }
