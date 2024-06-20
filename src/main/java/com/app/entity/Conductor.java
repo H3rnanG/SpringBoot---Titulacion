@@ -1,10 +1,13 @@
 package com.app.entity;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 
 
@@ -41,6 +44,9 @@ public class Conductor {
     @Column(name = "estado")
     private String estado;
 
+    @Column(name = "fecha_creacion")
+    private LocalDateTime fechaCreacion;
+    
  // Getters and Setters
     
 	public Integer getIdConductor() {
@@ -115,23 +121,36 @@ public class Conductor {
 		this.estado = estado;
 	}
 
-	
+	public LocalDateTime getFechaCreacion() {
+		return fechaCreacion;
+	}
 
-	public Conductor(Integer idConductor, String nombre, String dni, String telefono, String correo,
-			String tipoLicencia, String licencia, String estado) {
+	public void setFechaCreacion(LocalDateTime fechaCreacion) {
+		this.fechaCreacion = fechaCreacion;
+	}
+	
+	public Conductor(Integer idConductor, String nombre, String apellido, String dni, String telefono, String correo,
+			String tipoLicencia, String licencia, String estado, LocalDateTime fechaCreacion) {
 		super();
 		this.idConductor = idConductor;
 		this.nombre = nombre;
+		this.apellido = apellido;
 		this.dni = dni;
 		this.telefono = telefono;
 		this.correo = correo;
 		this.tipoLicencia = tipoLicencia;
 		this.licencia = licencia;
 		this.estado = estado;
+		this.fechaCreacion = fechaCreacion;
 	}
 
 	public Conductor() {
 		super();
+	}
+	
+	@PrePersist
+	protected void onCreate() {
+	    this.fechaCreacion = LocalDateTime.now();
 	}
     
 }

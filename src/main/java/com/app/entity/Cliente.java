@@ -1,5 +1,6 @@
 package com.app.entity;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -11,6 +12,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 
 @Entity
@@ -44,6 +46,9 @@ public class Cliente {
     @JsonManagedReference
     @JsonIgnoreProperties("cliente")
     private List<Mercancia> mercancia;
+    
+    @Column(name = "fecha_creacion")
+    private LocalDateTime fechaCreacion;
     
     // Getters and Setters
 
@@ -105,20 +110,44 @@ public class Cliente {
 
 	// Constructors
 	
-	public Cliente(Integer idCliente, String razonSocial, String tipoDocumento, String numeroDocumento, String telefono,
-			String correo, String direccion) {
+	public List<Mercancia> getMercancia() {
+		return mercancia;
+	}
+
+	public void setMercancia(List<Mercancia> mercancia) {
+		this.mercancia = mercancia;
+	}
+
+	public LocalDateTime getFechaCreacion() {
+		return fechaCreacion;
+	}
+
+	public void setFechaCreacion(LocalDateTime fechaCreacion) {
+		this.fechaCreacion = fechaCreacion;
+	}
+
+	public Cliente(Integer idCliente, String nombreRazonSocial, String tipoDocumento, String numeroDocumento,
+			String telefono, String correo, String direccion, List<Mercancia> mercancia, LocalDateTime fechaCreacion) {
 		super();
 		this.idCliente = idCliente;
-		this.nombreRazonSocial = razonSocial;
+		this.nombreRazonSocial = nombreRazonSocial;
 		this.tipoDocumento = tipoDocumento;
 		this.numeroDocumento = numeroDocumento;
 		this.telefono = telefono;
 		this.correo = correo;
 		this.direccion = direccion;
+		this.mercancia = mercancia;
+		this.fechaCreacion = fechaCreacion;
 	}
 
 	public Cliente() {
 		super();
 	}
+	
+	@PrePersist
+	protected void onCreate() {
+	    this.fechaCreacion = LocalDateTime.now();
+	}
+
 
 }

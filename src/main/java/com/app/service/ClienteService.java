@@ -1,6 +1,11 @@
 package com.app.service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,5 +51,30 @@ public class ClienteService {
 	public void deleteCliente(Integer id) {
 		clienteRepository.deleteById(id);
 	}
+	
+	public long getClientesRegistradosHoy() {
+        return clienteRepository.countClientesRegistradosHoy();
+    }
+	
+	public Map<String, Long> clientesPorMes() {
+        Map<String, Long> clientesPorMes = new HashMap<>();
+
+        // Obtener las fechas de los últimos 6 meses
+        LocalDate today = LocalDate.now();
+        for (int i = 0; i < 6; i++) {
+            LocalDate startDate = today.minusMonths(i).withDayOfMonth(1);
+            LocalDate endDate = today.minusMonths(i).withDayOfMonth(startDate.lengthOfMonth());
+
+            // Contar clientes registrados hasta el final de este mes
+            Long count = clienteRepository.countClientesByFechaCreacionBefore(endDate.atTime(23, 59, 59));
+            clientesPorMes.put(formatMesAnio(startDate), count);
+        }
+
+        return clientesPorMes;
+    }
+
+    private String formatMesAnio(LocalDate date) {
+        return date.format(DateTimeFormatter.ofPattern("M"));
+    }
 	
 }

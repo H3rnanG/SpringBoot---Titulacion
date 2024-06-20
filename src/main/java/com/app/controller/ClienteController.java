@@ -1,6 +1,7 @@
 package com.app.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -67,6 +68,18 @@ public class ClienteController {
         } catch (ResponseStatusException e) {
             return ResponseEntity.status(e.getStatusCode()).build();
         }
+    }
+    
+    @GetMapping("/registrados-hoy")
+    public ResponseEntity<Long> getClientesRegistradosHoy() {
+        long count = clienteService.getClientesRegistradosHoy();
+        return ResponseEntity.ok(count);
+    }
+    
+    @GetMapping("/clientes-por-mes")
+    public ResponseEntity<Map<String, Long>> getClientesPorMes() {
+        Map<String, Long> clientesPorMes = clienteService.clientesPorMes();
+        return ResponseEntity.ok(clientesPorMes);
     }
 }
 
