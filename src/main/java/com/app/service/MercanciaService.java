@@ -67,4 +67,16 @@ public class MercanciaService {
     public long getMercanciasRegistradasHoy() {
         return mercanciaRepository.countMercanciaRegistradosHoy();
     }
+    
+    public void subtractCantidad(Integer id, Integer cantidad) {
+        Mercancia mercancia = mercanciaRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Mercancia no encontrada"));
+
+        if (mercancia.getCantidad() < cantidad) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cantidad a restar mayor que la cantidad disponible");
+        }
+
+        mercancia.setCantidad(mercancia.getCantidad() - cantidad);
+        mercanciaRepository.saveAndFlush(mercancia);
+    }
 }

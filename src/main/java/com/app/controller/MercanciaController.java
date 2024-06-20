@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -73,5 +74,15 @@ public class MercanciaController {
     public ResponseEntity<Long> getMercanciasRegistradasHoy() {
         long count = mercanciaService.getMercanciasRegistradasHoy();
         return ResponseEntity.ok(count);
+    }
+    
+    @PostMapping("/subtract")
+    public ResponseEntity<Void> subtractCantidad(@RequestParam("id") int id, @RequestParam("cantidad") int cantidad) {
+        try {
+            mercanciaService.subtractCantidad(id, cantidad);
+            return ResponseEntity.ok().build();
+        } catch (ResponseStatusException e) {
+            return ResponseEntity.status(e.getStatusCode()).build();
+        }
     }
 }

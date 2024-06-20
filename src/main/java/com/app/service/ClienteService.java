@@ -74,7 +74,7 @@ public class ClienteService {
     }
 
     private String formatMesAnio(LocalDate date) {
-        return date.format(DateTimeFormatter.ofPattern("M"));
+        return date.format(DateTimeFormatter.ofPattern("YY-MM"));
     }
 	
     public List<Map<String, Object>> getClientesConMasGuiasGeneradas() {

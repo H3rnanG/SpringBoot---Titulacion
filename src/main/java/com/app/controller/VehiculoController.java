@@ -77,7 +77,7 @@ public class VehiculoController {
         return ResponseEntity.ok(countByEstado);
     }
     
-    @GetMapping("/viajes")
+    @GetMapping("/viajes")	
     public ResponseEntity<List<Map<String, Object>>> getVehiculosConViajes() {
         List<Map<String, Object>> vehiculos = vehiculoService.getVehiculosConViajes();
         return ResponseEntity.ok(vehiculos);

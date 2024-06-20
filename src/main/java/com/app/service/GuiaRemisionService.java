@@ -50,9 +50,9 @@ public class GuiaRemisionService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Guía de remisión no encontrada"));
     }
 
-    public void saveGuiaRemision(GuiaRemisionDTO guiaRemisionDTO) {
-    	GuiaRemision guiaRemision = mapper.map(guiaRemisionDTO, GuiaRemision.class);
-    	
+    public GuiaRemision saveGuiaRemision(GuiaRemisionDTO guiaRemisionDTO) {
+        GuiaRemision guiaRemision = mapper.map(guiaRemisionDTO, GuiaRemision.class);
+        
         // Obtener el cliente remitente por su ID y asignarlo a la guía de remisión
         Cliente remitente = clienteRepository.findById(guiaRemisionDTO.getIdClienteRemitente())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente remitente no encontrado"));
@@ -60,14 +60,14 @@ public class GuiaRemisionService {
         Conductor conductor = conductorRepository.findById(guiaRemisionDTO.getIdConductor())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Conductor no encontrado"));
         
-        Vehiculo vehiculo= vehiculoRepository.findById(guiaRemisionDTO.getIdVehiculo())
+        Vehiculo vehiculo = vehiculoRepository.findById(guiaRemisionDTO.getIdVehiculo())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Vehiculo no encontrado"));
         
         guiaRemision.setRemitente(remitente);
         guiaRemision.setConductor(conductor);
         guiaRemision.setVehiculo(vehiculo);
 
-        guiaRemisionRepository.save(guiaRemision);
+        return guiaRemisionRepository.save(guiaRemision);
     }
 
     public void updateGuiaRemision(Integer id, GuiaRemisionDTO guiaRemisionDTO) {
